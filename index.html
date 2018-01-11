@@ -1,0 +1,175 @@
+<!--
+ Copyright 2016 Google Inc.
+ 
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+ 
+      http://www.apache.org/licenses/LICENSE-2.0
+ 
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+-->
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="canonical" href="https://weather-pwa-sample.firebaseapp.com/final/">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StudentChart</title>
+  <link rel="stylesheet" type="text/css" href="styles/inline.css">
+
+  <!-- TODO add manifest here -->
+  <link rel="manifest" href="/your-first-pwapp-master/work/manifest.json">
+  <!-- Add to home screen for Safari on iOS -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="Weather PWA">
+  <link rel="apple-touch-icon" href="images/icons/icon-152x152.png">
+  <meta name="msapplication-TileImage" content="images/icons/icon-144x144.png">
+  <meta name="msapplication-TileColor" content="#2F3BA2">
+
+  <!--ChartJS CDN-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
+</head>
+<body>
+
+  <header class="header">
+    <h1 class="header__title">StudentChart</h1>
+  </header>
+
+  <main class="main">
+    
+
+    <div id="chart">
+      <div class="dropdown-menus" >
+      <form>
+        <div class="dropdown">
+
+          <Select id="dropdwn-one" name="schoolstuff">
+            <option value="0">Bedrijfstak MBO</option>
+            <option value="1">Voedsel en leefomgeving</option>
+            <option value="2">Combinatie bedrijf</option>
+            <option value="3">Detailhandel</option>
+            <option value="4">Economisch-administratieve beroepen</option>
+            <option value="5">Horeca, toerisme en voeding</option>
+            <option value="6">Vleessector</option>
+            <option value="7">Beschermings- en afwerkingstechnieken</option>
+            <option value="8">Bouw en grond-, weg- en waterbouw</option>
+            <option value="9">Groothandel en internationale handel</option>
+            <option value="10">Mode en textiel</option>
+            <option value="11">Sociaal-juridische dienstverlening en beveiliging</option>
+            <option value="12">Reclame- en presentatietechnieken</option>
+          </Select>
+
+          <Select id="dropdwn-two" name="schoolstuff">
+            <option value="0">Niveau</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+          </Select>
+
+          <Select id="dropdwn-three" name="schoolstuff">
+            <option value="0">Provincie</option>
+            <option value="1">Drenthe</option>
+            <option value="2">Flevoland</option>
+            <option value="3">Friesland</option>
+            <option value="4">Gelderland</option>
+            <option value="5">Groningen</option>
+            <option value="6">Limburg</option>
+            <option value="7">Noord-Brabant</option>
+            <option value="8">Overijssel</option>
+            <option value="9">Utrecht</option>
+            <option value="10">Zeeland</option>
+            <option value="11">Zuid-Holland</option>
+          </Select>
+        </div>
+
+        <div id="dropdwn-extra" class="dropdown-extra" hidden>
+          <Select id="dropdwn-four" name="schoolstuff">
+            <option value="0">Type MBO</option>
+            <option value="1">BBL</option>
+            <option value="2">BOL</option>
+          </Select>
+
+          <Select id="dropdwn-five" name="schoolstuff">
+            <option value="0">Woongemeente</option>
+            <option value="1">Apeldoorn</option>
+            <option value="2">Breda</option>
+            <option value="3">Barneveld</option>
+            <option value="4">Culemborg</option>
+            <option value="5">Druten</option>
+            <option value="6">Dordrecht</option>
+            <option value="7">Eindhoven</option>
+            <option value="8">Ede</option>
+            <option value="9">Groningen</option>
+            <option value="10">Haaksbergen</option>
+            <option value="11">Harderwijk</option>
+            <option value="12">Deventer</option>
+            <option value="13">Lelystad</option>
+            <option value="14">Amsterdam</option>
+          </Select>
+        </div>
+            <br>
+            <input id="submit" type="submit">
+      </form>
+            <button id="advanced" onclick="advanced()">Advanced</button>
+    </div>
+    <canvas id="myChart" ></canvas>
+
+<script>
+var ctx = document.getElementById("myChart");
+var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+        datasets: [{
+            label: '# of Votes',
+            data: [12, 19, 3, 5, 2, 3],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255,99,132,1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero:true
+                }
+            }]
+        }
+    }
+});
+</script>
+</div>
+
+  </main>
+
+  
+
+  <!-- Uncomment the line below when ready to test with fake data -->
+  <script src="scripts/app.js" async></script>
+
+</body>
+</html>
